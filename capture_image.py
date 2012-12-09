@@ -9,10 +9,12 @@ def capture(directory, video_device='/dev/video0',
             resolution=[1280, 1024], image_ext='png',
             buffers=1):
 
+    image_resolution = [int(resolution[0]),
+                        int(resolution[1])]
     video = v4l2capture.Video_device(video_device)
 # Suggest an image size to the device. The device may choose and
 # return another size if it doesn't support the suggested one.
-    size_x, size_y = video.set_format(*resolution)
+    size_x, size_y = video.set_format(*image_resolution)
 # Create a buffer to store image data in. This must be done before
 # calling 'start' if v4l2capture is compiled with libv4l2. Otherwise
 # raises IOError.
