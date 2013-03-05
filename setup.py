@@ -15,7 +15,7 @@ setup(
                 ('/'.join([CONFIG_PATH, 'captures']), []),
                 ('/'.join([CONFIG_PATH, 'videos']), [])
                 ],
-    url='http://pypi.python.org/pypi/PyLapse/',
+    url='https://github.com/javaguirre/pylapse',
     license='LICENSE.txt',
     description='A simple application to build timelapses using a webcam, V4l2 and ImageMagick',
     long_description=open('README.txt').read(),
