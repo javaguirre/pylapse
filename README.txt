@@ -1,7 +1,8 @@
+=======
 PyLapse
 =======
 
-A simple application to build timelapses using a webcam, Python, V4l2 and ImageMagick
+A simple application to build timelapses using a webcam, V4l2 and ImageMagick
 
 
 Install
@@ -12,7 +13,7 @@ Install
 
 Or setup a virtualenv environment with...
 
-    $ virtualenv2 venv  ; Maybe you need just virtualenv
+    $ virtualenv2 venv  --distribute ; Maybe you need just virtualenv
     $ venv/bin/activate
     $ pip -r install requirements.txt --upgrade
 
@@ -35,17 +36,17 @@ You can define the variables for the captures and video generation in `config.py
 
 Then you can create the images with:
 
-    $ python app.py capture
+    $ python pylapse_menu.py capture
 
 Then you could generate the video with:
 
-    $ python app.py video
+    $ python pylapse_menu.py video
 
 You can access the program help:
 
-    $ python app.py -h ; Global help information
-    $ python app.py capture -h ; Capture Image Help
-    $ python app.py video -h ; Video generation help
+    $ python pylapse_menu.py -h ; Global help information
+    $ python pylapse_menu.py capture -h ; Capture Image Help
+    $ python pylapse_menu.py video -h ; Video generation help
 
 
 Have fun! :-)
