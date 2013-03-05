@@ -2,3 +2,5 @@
 *.pyc
 captures/
 videos/
+build/
+dist/
