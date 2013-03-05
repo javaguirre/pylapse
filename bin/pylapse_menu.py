@@ -1,25 +1,7 @@
-import os
 import argparse
-import subprocess
 
-from capture_image import capture
-from time import sleep
-from config import *
-
-
-def create_timelapse(args):
-    while True:
-        capture(CAPTURES_PATH, **args)
-        sleep(DELAY)
-
-
-def generate_video(videos_path, captures_path, delay=20):
-    captures_dir = os.path.join(captures_path, '*.%s' % IMAGE_EXT)
-    videos_dir = os.path.join(videos_path, 'outvideo.mpeg')
-    command = 'convert -delay %d -loop 0 -scale %s %s %s' % (delay, '50%',
-                                                             captures_dir,
-                                                             videos_dir)
-    subprocess.call(command, shell=True)
+from pylapse.utils import create_timelapse, generate_video
+from pylapse.config import *
 
 
 def main():

@@ -1,8 +1,12 @@
 import os
-import Image
-import select
-import v4l2capture
+import subprocess
 import time
+import select
+
+import Image
+import v4l2capture
+
+from config import *
 
 
 def capture(directory, video_device='/dev/video0',
@@ -12,19 +16,15 @@ def capture(directory, video_device='/dev/video0',
     image_resolution = [int(resolution[0]),
                         int(resolution[1])]
     video = v4l2capture.Video_device(video_device)
-# Suggest an image size to the device. The device may choose and
-# return another size if it doesn't support the suggested one.
+
     size_x, size_y = video.set_format(*image_resolution)
-# Create a buffer to store image data in. This must be done before
-# calling 'start' if v4l2capture is compiled with libv4l2. Otherwise
-# raises IOError.
+
     video.create_buffers(buffers)
-# Send the buffer to the device. Some devices require this to be done
-# before calling 'start'.
+
     video.queue_all_buffers()
-# Start the device. This lights the LED if it's a camera that has one.
+
     video.start()
-# Wait for the device to fill the buffer.
+
     select.select((video,), (), ())
 
     image_data = video.read()
@@ -33,3 +33,18 @@ def capture(directory, video_device='/dev/video0',
     video.close()
     image = Image.fromstring("RGB", (size_x, size_y), image_data)
     image.save(full_path)
+
+
+def create_timelapse(args):
+    while True:
+        capture(CAPTURES_PATH, **args)
+        time.sleep(DELAY)
+
+
+def generate_video(videos_path, captures_path, delay=20):
+    captures_dir = os.path.join(captures_path, '*.%s' % IMAGE_EXT)
+    videos_dir = os.path.join(videos_path, 'outvideo.mpeg')
+    command = 'convert -delay %d -loop 0 -scale %s %s %s' % (delay, '50%',
+                                                             captures_dir,
+                                                             videos_dir)
+    subprocess.call(command, shell=True)
