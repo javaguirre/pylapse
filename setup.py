@@ -1,6 +1,8 @@
 import os
 from distutils.core import setup
 
+HOME_PATH = os.path.expanduser('~')
+CONFIG_PATH = '%s/.pylapse' % HOME_PATH
 
 setup(
     name='PyLapse',
@@ -8,7 +10,11 @@ setup(
     author='Javier Aguirre',
     author_email='contacto@javaguirre.net',
     packages=['pylapse'],
-    scripts=['bin/pylapse_menu.py'],
+    scripts=['bin/pylapse'],
+    data_files=[(CONFIG_PATH, ['data/config.cfg']),
+                ('/'.join([CONFIG_PATH, 'captures']), []),
+                ('/'.join([CONFIG_PATH, 'videos']), [])
+                ],
     url='http://pypi.python.org/pypi/PyLapse/',
     license='LICENSE.txt',
     description='A simple application to build timelapses using a webcam, V4l2 and ImageMagick',
