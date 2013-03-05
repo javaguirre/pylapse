@@ -6,7 +6,7 @@ CONFIG_PATH = '%s/.pylapse' % HOME_PATH
 
 setup(
     name='PyLapse',
-    version='0.1.0',
+    version='0.1.1',
     author='Javier Aguirre',
     author_email='contacto@javaguirre.net',
     packages=['pylapse'],
@@ -16,7 +16,7 @@ setup(
                 ('/'.join([CONFIG_PATH, 'videos']), [])
                 ],
     url='https://github.com/javaguirre/pylapse',
-    license='LICENSE.txt',
+    license=open('LICENSE.txt').read(),
     description='A simple application to build timelapses using a webcam, V4l2 and ImageMagick',
     long_description=open('README.txt').read(),
     install_requires=['PIL == 1.1.7',
