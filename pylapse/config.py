@@ -1,8 +1,7 @@
 import os
 import ConfigParser
 
-HOME_PATH = os.path.expanduser('~')
-CONFIG_PATH = '%s/.pylapse/config.cfg' % HOME_PATH
+CONFIG_PATH = os.path.expanduser('~/.pylapse/config.cfg')
 config = ConfigParser.ConfigParser()
 
 if os.path.exists(CONFIG_PATH):
@@ -12,12 +11,12 @@ DELAY = float(config.get('pylapse', 'DELAY'))
 CAPTURES_PATH = config.get('pylapse', 'CAPTURES_PATH')
 
 if CAPTURES_PATH.startswith('~'):
-    CAPTURES_PATH = CAPTURES_PATH.replace('~', HOME_PATH, 1)
+    CAPTURES_PATH = os.path.expanduser(CAPTURES_PATH)
 
 VIDEOS_PATH = config.get('pylapse', 'VIDEOS_PATH')
 
 if VIDEOS_PATH.startswith('~'):
-    VIDEOS_PATH = VIDEOS_PATH.replace('~', HOME_PATH, 1)
+    VIDEOS_PATH = os.path.expanduser(VIDEOS_PATH)
 
 IMAGE_EXT = config.get('pylapse', 'IMAGE_EXT')
 VIDEO_DEVICE = config.get('pylapse', 'VIDEO_DEVICE')
